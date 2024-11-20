@@ -12,6 +12,27 @@ server.use(cors());
 
 server.use(express.static(path.join(__dirname, '../public')));
 
+const rateLimit = require('express-rate-limit');
+
+// Configuração do limitador
+const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minuto
+    max: 100, // Máximo de 100 requisições por IP
+    message: "Muitas requisições do mesmo IP. Tente novamente mais tarde.",
+});
+
+// Aplicando o limitador a todas as rotas
+server.use('/api/', limiter);
+
+const fs = require('fs');
+const morgan = require('morgan');
+
+// Configuração do stream de logs
+const accessLogStream = fs.createWriteStream('./access.log', { flags: 'a' });
+
+// Aplicando morgan para logar todas as requisições
+server.use(morgan('combined', { stream: accessLogStream }));
+
 //AQUI EU DIGO O FORMATO QUE EU QUERO A REQUISIÇÃO
 //server.use(express.urlencoded({ extended: true })); // USANDO URL ENCODED
 server.use(express.json()); //USANDO JSON

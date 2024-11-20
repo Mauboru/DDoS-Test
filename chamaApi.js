@@ -19,7 +19,7 @@ document.addEventListener('click', function (event) {
 });
 
 function inserirMuitosUsuarios() {
-    const numeroDeUsuarios = 100;
+    const numeroDeUsuarios = 10000;
 
     for (let i = 0; i < numeroDeUsuarios; i++) {
         const nome = `Usuario${i}`;
