@@ -32,6 +32,6 @@ export const Usuario = sequelize.define<UsuarioInstance>('Usuario', {
         unique: true
     },
 }, {
-    tableName: 'usuarios',
+    tableName: 'ss_usuarios',
     timestamps: false
 });

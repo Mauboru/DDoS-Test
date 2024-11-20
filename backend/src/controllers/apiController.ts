@@ -57,7 +57,9 @@ export const listarEmails = async (req: Request, res: Response) => {
 }
 
 export const listarTodosUsuarios = async (req: Request, res: Response) => {
-    let usuarios = await Usuario.findAll();
+    let usuarios = await Usuario.findAll({
+        order: [["nome", "DESC"]],
+    });
 
     res.json({ usuarios });
 }

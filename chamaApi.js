@@ -1,12 +1,11 @@
 const btnEditarUsuario = document.getElementById('btnEditarUsuario');
 const corpoTabelaPersonagens = document.getElementById('corpoTabelaPersonagens');
 const botaoChamarAPI = document.getElementById('botaoChamarAPI');
+const botaoDDOS = document.getElementById('botaoDDOS');
 
 botaoChamarAPI.addEventListener('click', () => {
     buscarDadosEPreencherTabela();
 });
-
-const botaoDDOS = document.getElementById('botaoDDOS');
 
 botaoDDOS.addEventListener('click', () => {
     inserirMuitosUsuarios();
@@ -42,7 +41,7 @@ document.querySelector('#btnCadastrarUsuario').addEventListener('click', functio
 });
 
 function buscarDadosEPreencherTabela() {
-    axios.get('http://infopguaifpr.com.br:3052/listarTodosUsuarios')
+    axios.get('http://localhost:3000/listarTodosUsuarios')
         .then(response => {
             console.log(response.data.usuarios)
 
@@ -69,7 +68,7 @@ function cadastrarUsuario(nome, email, disciplina, senha) {
         senha: senha
     };
 
-    axios.post('http://infopguaifpr.com.br:3052/cadastrarUsuario', novoUsuario, {
+    axios.post('http://localhost:3000/cadastrarUsuario', novoUsuario, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -86,7 +85,7 @@ function cadastrarUsuario(nome, email, disciplina, senha) {
 }
 
 function deletarUsuario(idUsuario) {
-    axios.delete(`http://infopguaifpr.com.br:3052/deletarUsuario/${idUsuario}`)
+    axios.delete(`http://localhost:3000/deletarUsuario/${idUsuario}`)
         .then(response => {
             console.log('Usuario excluido com suceso')
             alert('Usuario excluido com sucesso')
@@ -153,7 +152,7 @@ function abrirModalEdicao(idUsuario) {
 
     console.log('ID do usuário:', idUsuario);
 
-    axios.get(`http://infopguaifpr.com.br:3052/pegarUsuarioPeloId/${idUsuario}`)
+    axios.get(`http://localhost:3000/pegarUsuarioPeloId/${idUsuario}`)
         .then(response => {
             const usuario = response.data.usuario;
             const iddoUsuario = response.data.usuario.id;
@@ -183,7 +182,7 @@ function atualizarUsuario(idUsuario, nome, email, disciplina) {
         disciplina: disciplina
     };
 
-    axios.put(`http://infopguaifpr.com.br:3052/atualizarUsuario/${idUsuario}`, usuarioAtualizado)
+    axios.put(`http://localhost:3000/atualizarUsuario/${idUsuario}`, usuarioAtualizado)
         .then(response => {
             console.log('Usuário atualizado com sucesso:', response.data);
 

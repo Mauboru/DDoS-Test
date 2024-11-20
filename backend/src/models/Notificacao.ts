@@ -27,6 +27,6 @@ export const Notificacao = sequelize.define<NotificacaoInstance>('Notificacao', 
     },
 
 }, {
-    tableName: 'notificacao',
+    tableName: 'ss_notificacao',
     timestamps: false
 });
