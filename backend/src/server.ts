@@ -17,7 +17,7 @@ const rateLimit = require('express-rate-limit');
 // Configuração do limitador
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minuto
-    max: 100, // Máximo de 100 requisições por IP
+    max: 5, // Máximo de 100 requisições por IP
     message: "Muitas requisições do mesmo IP. Tente novamente mais tarde.",
 });
 
@@ -39,7 +39,7 @@ server.use(express.json()); //USANDO JSON
 
 server.get('/ping', (req: Request, res: Response) => res.json({ pong: true }));
 
-server.use(apiRoutes);
+server.use('/api', apiRoutes);
 
 server.use((req: Request, res: Response) => {
     res.status(404);
